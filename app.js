@@ -105,14 +105,14 @@ console.log("***DESAFIO***")
     }
 
     calculaSubtotal(){
-      let precio ;
+       let precio ;
         this._subtotal = reservas.reduce((acc,{pax,noches,tipoHabitacion}) =>{
      tipoHabitacion === "standard"
        ? (precio = this._preciosTipoHabitacion.standard)
        : (precio = this._preciosTipoHabitacion.suite);
        return acc =acc +(precio * noches) +this.suplementoPersonaAdicional(pax)
-       } ,0)
-        
+       } ,0) 
+         
     }
     calcularTotal(){
       this._total = (this._subtotal * 1.21).toFixed(2)
@@ -120,8 +120,6 @@ console.log("***DESAFIO***")
     
     set reservas(reservas){
         this._reservas = reservas;
-        this.calculaSubtotal();
-        this.calcularTotal();
     }
     get subtotal(){
         return this._subtotal;
@@ -131,22 +129,15 @@ console.log("***DESAFIO***")
     }
 } 
 const bookingHotel = new Bookings();
+bookingHotel.calculaSubtotal();
+bookingHotel.calcularTotal();
 bookingHotel.reservas = reservas;
 
 class Particular extends Bookings{
   constructor(){
     super();
   }
-   calculaSubtotal() {
-    let precio ;
-        this._subtotal = reservas.reduce((acc,{pax,noches,tipoHabitacion}) =>{
-        tipoHabitacion === "standard" ? precio = this._preciosTipoHabitacion.standard : precio = this._preciosTipoHabitacion.suite
-       return acc =acc +(precio * noches) +this.suplementoPersonaAdicional(pax)
-       } ,0)  
-    }  
-    calcularTotal(){
-      this._total = (this._subtotal * 1.21).toFixed(2)
-    }
+ 
   }
   const desafioParticular = new Particular();
   desafioParticular.reservas= reservas;
@@ -163,15 +154,6 @@ class Particular extends Bookings{
         suite: 100,
       };
       this.descuento = 0.85 //==>15%
-    }
-    calcularSubtotal(){
-     /*  this._subtotal = reservas.reduce((acc, { noches, pax }) => {
-        tipoHabitacion === "standard"
-          ? (precio = this._preciosTipoHabitacion.standard)
-          : (precio = this._preciosTipoHabitacion.suite);
-        return (acc =
-          acc + precio * noches + this.suplementoPersonaAdicional(pax));
-      }, 0); */
     }
     
     calcularTotal(){
